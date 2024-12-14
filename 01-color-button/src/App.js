@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 
 function App() {
   // Vars and States
@@ -12,13 +11,14 @@ function App() {
 
   // return ui
   return (
-    <div className="App">
+    <div>
       <button
         onClick={toggleButtonColor}
         style={{ backgroundColor: buttonColor }}
       >
         Change to {buttonColor === "red" ? `blue` : `red`}
       </button>
+      <input type="checkbox" />
     </div>
   );
 }

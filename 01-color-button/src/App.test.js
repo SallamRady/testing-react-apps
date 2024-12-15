@@ -21,7 +21,7 @@ test("button has correct initial color,check after clicked", () => {
   expect(colorButton).toHaveTextContent("Change to red");
 });
 
-test("initial condations", () => {
+test("initial condations and check When checkbox is checked, button should be disabled", () => {
   render(<App />);
 
   // select element with role button and text of 'Change to blue'
@@ -30,7 +30,14 @@ test("initial condations", () => {
   expect(colorButton).toBeEnabled();
 
   // select element with role checkbox
-  const checkbox = screen.getByRole("checkbox");
+  const checkbox = screen.getByRole("checkbox",{name:'Disabled button'});
   // makesure checkbox initial unchecked
   expect(checkbox).not.toBeChecked();
+
+  // check checkbox
+  fireEvent.click(checkbox);
+
+  // When checkbox is checked, button should be disabled
+  expect(colorButton).toBeDisabled();
+
 });

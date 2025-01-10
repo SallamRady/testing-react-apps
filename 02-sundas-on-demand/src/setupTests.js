@@ -3,13 +3,3 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
-import { server } from "./mocks/server";
-
-// establish Mock API before all tests
-beforeAll(() => server.listen());
-
-// reset server after each test
-afterEach(() => server.resetHandlers());
-
-// clean up after tests are finished
-afterAll(() => server.close());

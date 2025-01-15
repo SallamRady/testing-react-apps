@@ -1,16 +1,12 @@
 {
-  "name": "02-sundas-on-demand",
+  "name": "02-basics",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "axios": "^1.7.9",
-    "bootstrap": "^5.3.3",
-    "eslint-plugin-jest-dom": "^5.5.0",
-    "eslint-plugin-testing-library": "^7.1.1",
     "react": "^19.0.0",
-    "react-bootstrap": "^2.10.7",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.0"
@@ -20,6 +16,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -32,15 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
-    "@babel/preset-react": "^7.26.3",
-    "@babel/preset-typescript": "^7.26.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "babel-jest": "^29.7.0",
-    "jest": "^29.7.0",
-    "msw": "^2.7.0"
   }
 }

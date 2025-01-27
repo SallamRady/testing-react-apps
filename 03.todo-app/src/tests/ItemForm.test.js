@@ -40,7 +40,7 @@ test("Testcase#2 - when user type ,input value will change", async () => {
 test("Testcase #3 - check error message displayed when input value is empty", async () => {
   // declare mockOnAddTaskFn
   const mockOnAddTaskFn = jest.fn();
-  
+
   // render our component
   render(<ItemForm onAddTask={mockOnAddTaskFn} />);
 
@@ -54,6 +54,7 @@ test("Testcase #3 - check error message displayed when input value is empty", as
 
   expect(errorMsg).toBeInTheDocument();
 });
+
 // test case#4 - check if item added to list when user click on add button
 
 // test case#5 - check if input cleared after item added

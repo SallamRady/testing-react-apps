@@ -37,7 +37,23 @@ test("Testcase#2 - when user type ,input value will change", async () => {
 });
 
 // test case#3 - check error message displayed when input value is empty
+test("Testcase #3 - check error message displayed when input value is empty", async () => {
+  // declare mockOnAddTaskFn
+  const mockOnAddTaskFn = jest.fn();
+  
+  // render our component
+  render(<ItemForm onAddTask={mockOnAddTaskFn} />);
 
+  // declare element
+  const addBtn = screen.getByTestId("task-add-btn");
+
+  // check
+  await userEvent.click(addBtn);
+
+  const errorMsg = await screen.findByTestId("error-message");
+
+  expect(errorMsg).toBeInTheDocument();
+});
 // test case#4 - check if item added to list when user click on add button
 
 // test case#5 - check if input cleared after item added

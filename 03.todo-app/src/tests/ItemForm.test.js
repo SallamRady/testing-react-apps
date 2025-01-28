@@ -56,7 +56,41 @@ test("Testcase #3 - check error message displayed when input value is empty", as
 });
 
 // test case#4 - check if item added to list when user click on add button
+test("Testcase #4 - check if item added to list when user click on add button", async () => {
+  // declare mockOnAddTaskFn
+  const mockOnAddTaskFn = jest.fn();
+
+  // render our component
+  render(<ItemForm onAddTask={mockOnAddTaskFn} />);
+
+  // declare element
+  const addBtn = screen.getByTestId("task-add-btn");
+  const taskName = screen.getByTestId("task-name");
+
+  // check
+  await userEvent.type(taskName, "task 1");
+  await userEvent.click(addBtn);
+
+  expect(mockOnAddTaskFn).toHaveBeenCalled();
+});
 
 // test case#5 - check if input cleared after item added
+test("Testcase #5 - check if input cleared after item added", async () => {
+  // declare mockOnAddTaskFn
+  const mockOnAddTaskFn = jest.fn();
+
+  // render our component
+  render(<ItemForm onAddTask={mockOnAddTaskFn} />);
+
+  // declare element
+  const addBtn = screen.getByTestId("task-add-btn");
+  const taskName = screen.getByTestId("task-name");
+
+  // check
+  await userEvent.type(taskName, "task 1");
+  await userEvent.click(addBtn);
+
+  expect(taskName).toHaveValue('');
+});
 
 // test case#6 - check if item deleted to list when user click on delete button

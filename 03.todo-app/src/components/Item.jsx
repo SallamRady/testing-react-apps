@@ -46,6 +46,7 @@ export const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
       </div>
       <div className="my-1 d-flex">
         <button
+          data-testid="delete-btn"
           className="btn btn-danger me-2"
           onClick={() => onDeleteTask(task)}
         >

@@ -32,11 +32,10 @@ test("testcase #3 -check if done btn work correctly", async () => {
   // render component
   render(<Item task={task} onDoneTask={mockOnDoneTask} />);
 
-  // select and determined 
+  // select and determined
   const doneBtn = await screen.findByTestId("done-btn");
 
   expect(doneBtn).toBeInTheDocument();
-  
 
   // click on done task
   await userEvent.click(doneBtn);
@@ -44,9 +43,41 @@ test("testcase #3 -check if done btn work correctly", async () => {
 
   const undoBtn = await screen.findByTestId("undo-btn");
 
-  
   await userEvent.click(undoBtn);
   expect(mockOnDoneTask).toHaveBeenCalledWith(task);
 });
 
 // testcase #4 -check if edit btn work correctly
+test("testcase #4 -check if edit btn work correctly", async () => {
+  const mockOnEditTask = jest.fn();
+  const task = { id: 1, name: "Task 1", done: false };
+
+  render(<Item task={task} onEditTask={mockOnEditTask} />);
+
+  const btn = screen.getByTestId("edit-btn");
+
+  await userEvent.click(btn);
+
+  // check input appear
+  const editInput = screen.getByTestId("edit-input");
+  expect(editInput).toBeInTheDocument();
+  expect(mockOnEditTask).toHaveBeenCalledWith(task);
+});
+
+
+// testcase #5 - check if edit input have value of task name
+test("testcase #5 - check if edit input have value of task name", async () => {
+  const mockOnEditTask = jest.fn();
+  const task = { id: 1, name: "Task 1", done: false };
+
+  render(<Item task={task} onEditTask={mockOnEditTask} />);
+
+  const btn = screen.getByTestId("edit-btn");
+
+  await userEvent.click(btn);
+
+  const editInput = screen.getByTestId("edit-input");
+
+  expect(editInput).toHaveValue('Task 1')
+  expect(mockOnEditTask).toHaveBeenCalledWith(task);
+});

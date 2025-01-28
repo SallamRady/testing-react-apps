@@ -31,13 +31,14 @@ export const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
 
         {edit ? (
           <input
+            data-testid="edit-input"
             type="text"
             className="form-control "
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         ) : task.done ? (
-          <h4 className="me-3 pt-2 text-decoration-line-through">
+          <h4 data-testid="task-name" className="me-3 pt-2 text-decoration-line-through">
             {task.name}
           </h4>
         ) : (
@@ -53,15 +54,27 @@ export const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
           Delete
         </button>
         {done === false ? (
-          <button data-testid="done-btn" className="btn btn-success me-2" onClick={doneTask}>
+          <button
+            data-testid="done-btn"
+            className="btn btn-success me-2"
+            onClick={doneTask}
+          >
             Done
           </button>
         ) : (
-          <button data-testid="undo-btn" className="btn btn-info me-2" onClick={doneTask}>
+          <button
+            data-testid="undo-btn"
+            className="btn btn-info me-2"
+            onClick={doneTask}
+          >
             Undo
           </button>
         )}
-        <button className="btn btn-secondary me-2" onClick={editTask}>
+        <button
+          data-testid="edit-btn"
+          className="btn btn-secondary me-2"
+          onClick={editTask}
+        >
           Edit
         </button>
       </div>

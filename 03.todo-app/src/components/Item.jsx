@@ -53,11 +53,11 @@ export const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
           Delete
         </button>
         {done === false ? (
-          <button className="btn btn-success me-2" onClick={doneTask}>
+          <button data-testid="done-btn" className="btn btn-success me-2" onClick={doneTask}>
             Done
           </button>
         ) : (
-          <button className="btn btn-info me-2" onClick={doneTask}>
+          <button data-testid="undo-btn" className="btn btn-info me-2" onClick={doneTask}>
             Undo
           </button>
         )}

@@ -12,6 +12,7 @@ export default function PostsList() {
 
     data();
   }, []);
+  
   return (
     <div>
       <h1 data-testid='posts-list-header'>Fake Posts List</h1>

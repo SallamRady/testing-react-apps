@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+MSW Docs
+Three steps to get started with Mock Service Worker.
+#1-Installation--->npm install msw@latest --save-dev
+#2-Describe
+Next, you describe the network using Request handlers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+import { http, HttpResponse } from "msw";
 
-## Available Scripts
+export const handlers = [
+  http.get("https://jsonplaceholder.typicode.com/posts", () => {
+    return HttpResponse.json([
+        { title: "post 1", body: "body of post num 1" }
+    ]);
+  }),
+];
 
-In the project directory, you can run:
+```
+#3-Integrate
+MSW integrates with any frameworks, request libraries, and other tools because it applies itself on the environment level, which means you only have to decide whether you want to use it in the browser or in a Node.js process (or both). You still (re)use the same request handlers regardless of the environment you are in.
 
-### `yarn start`
+For this tutorial, let’s integrate MSW into a plain Node.js process by creating a Node.js integration module called node.js:
+```
+import { setupServer } from "msw/node";
+import { handlers } from "./handlers";
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+export const server = setupServer(...handlers);
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-> The node.js integration module we’ve created configures MSW to run in any Node.js process but doesn’t actually start it just yet. To start the request interception, you need to call server.listen() in your Node.js process:
